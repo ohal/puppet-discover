@@ -8,9 +8,9 @@ Port <%= scope.lookupvar('ssh::ssh_port') %>
 # Use these options to restrict which interfaces/protocols sshd will bind to
 #ListenAddress ::
 #ListenAddress 0.0.0.0
-#<% scope.lookupvar('ssh::ssh_listen_address').each do |address| -%>
-#ListenAddress <%= address %>
-#<% end -%>
+<% scope.lookupvar('ssh::ssh_listen_address').each do |address| -%>
+ListenAddress <%= address %>
+<% end -%>
 Protocol 2
 # HostKeys for protocol version 2
 HostKey /etc/ssh/ssh_host_rsa_key
@@ -25,7 +25,7 @@ ServerKeyBits 768
 
 # Logging
 SyslogFacility AUTH
-LogLevel INFO
+LogLevel VERBOSE
 
 # Authentication:
 LoginGraceTime 120
@@ -33,9 +33,9 @@ PermitRootLogin <%= scope.lookupvar('ssh::ssh_root_login') %>
 StrictModes yes
 
 # Allow users:
-#<% scope.lookupvar('ssh::ssh_users').each do |user| -%>
-#AllowUser <%= user %>
-#<% end -%>
+<% scope.lookupvar('ssh::ssh_users').each do |user| -%>
+AllowUsers <%= user %>
+<% end -%>
 
 RSAAuthentication yes
 PubkeyAuthentication yes
@@ -58,7 +58,7 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 
 # Change to no to disable tunnelled clear text passwords
-#PasswordAuthentication yes
+PasswordAuthentication <%= scope.lookupvar('ssh::ssh_password_authentication') %>
 
 # Kerberos options
 #KerberosAuthentication no

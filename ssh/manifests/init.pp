@@ -1,10 +1,10 @@
 class ssh (
   $ssh_ensure = 'present',
   $ssh_port = '22',
-  $ssh_listen_address = ['192.168.0.0'],
-  #,'10.1.1.0'],
+  $ssh_listen_address = ['192.168.153.49'],
   $ssh_root_login = 'yes',
-  $ssh_users = ['root'],
+  $ssh_password_authentication = 'no',
+  $ssh_users = ['root','ohal'],
   $ssh_manage_install = true,
   $ssh_manage_config = true,
   $ssh_manage_service = true,
@@ -17,26 +17,30 @@ class ssh (
   $ssh_service_ensure = 'running',
   $ssh_service_name = undef,
   $ssh_service_enable = true,
- ) {
+  ) {
 
   if ! $ssh_service_name {
-    $ssh_service_name_real = $::osfamily ? {
-                        'Debian' => hiera('ssh_service_name','ssh'),
-                        'RedHat' => hiera('ssh_service_name','sshd'),
-                        default  => hiera('ssh_service_name',undef),
-                    }
+      $ssh_service_name_real = $::osfamily ? {
+        'Debian' => hiera('ssh_service_name','ssh'),
+        'RedHat' => hiera('ssh_service_name','sshd'),
+        default  => hiera('ssh_service_name',undef),
+        }
   } else {
-   $ssh_service_name_real = $ssh_service_name
+      $ssh_service_name_real = $ssh_service_name
   }
 
   if ! $ssh_packages {
-    $ssh_packages_real = $::osfamily ? {
-                        'Debian' => hiera('ssh_packages',['ssh','openssh-client','openssh-server']),
-                        'RedHat' => hiera('ssh_packages',['openssh','openssh-clients','openssh-server']),
-                        default  => hiera('ssh_packages',undef),
-                    }
+      $ssh_packages_real = $::osfamily ? {
+        'Debian' => hiera('ssh_packages',
+          ['ssh','openssh-client','openssh-server']
+        ),
+        'RedHat' => hiera('ssh_packages',
+          ['openssh','openssh-clients','openssh-server']
+        ),
+        default  => hiera('ssh_packages',undef),
+        }
   } else {
-   $ssh_packages_real = $ssh_packages
+      $ssh_packages_real = $ssh_packages
   }
 
   case $ssh_ensure {
