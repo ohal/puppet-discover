@@ -1,10 +1,21 @@
+# 0.1 openssh manipulating by puppet
+# ohal@softserveinc.com
+# = check and install and configure openssh server and client
+# ubuntu 12 and centos 6 tested
+
 class ssh (
   $ssh_ensure = 'present',
+  # port is open for external connection to openssh server
   $ssh_port = '22',
+  # openssh server is listen from ip addresses
   $ssh_listen_address = ['192.168.153.49'],
+  # root connections restriction
   $ssh_root_login = 'yes',
+  # clear password restriction
   $ssh_password_authentication = 'no',
+  # users what allowed to connect to openssh server
   $ssh_users = ['root','ohal'],
+  # addition
   $ssh_manage_install = true,
   $ssh_manage_config = true,
   $ssh_manage_service = true,
