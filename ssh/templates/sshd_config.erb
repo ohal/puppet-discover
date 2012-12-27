@@ -8,8 +8,10 @@ Port <%= scope.lookupvar('ssh::ssh_port') %>
 # Use these options to restrict which interfaces/protocols sshd will bind to
 #ListenAddress ::
 #ListenAddress 0.0.0.0
+<% if scope.lookupvar('ssh::ssh_listen_address').empty? == false then -%>
 <% scope.lookupvar('ssh::ssh_listen_address').each do |address| -%>
 ListenAddress <%= address %>
+<% end -%>
 <% end -%>
 Protocol 2
 # HostKeys for protocol version 2
@@ -33,10 +35,11 @@ PermitRootLogin <%= scope.lookupvar('ssh::ssh_root_login') %>
 StrictModes yes
 
 # Allow users:
+<% if scope.lookupvar('ssh::ssh_users').empty? == false then -%>
 <% scope.lookupvar('ssh::ssh_users').each do |user| -%>
 AllowUsers <%= user %>
 <% end -%>
-
+<% end -%>
 RSAAuthentication yes
 PubkeyAuthentication yes
 #AuthorizedKeysFile	%h/.ssh/authorized_keys
@@ -51,7 +54,7 @@ HostbasedAuthentication no
 #IgnoreUserKnownHosts yes
 
 # To enable empty passwords, change to yes (NOT RECOMMENDED)
-PermitEmptyPasswords no
+PermitEmptyPasswords <%= scope.lookupvar('ssh::ssh_empty_password') %>
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)

@@ -8,13 +8,15 @@ class ssh (
   # port is open for external connection to openssh server
   $ssh_port = '22',
   # openssh server is listen from ip addresses
-  $ssh_listen_address = ['192.168.153.49'],
+  $ssh_listen_address = [],
   # root connections restriction
   $ssh_root_login = 'yes',
   # clear password restriction
   $ssh_password_authentication = 'no',
   # users what allowed to connect to openssh server
-  $ssh_users = ['root','ohal'],
+  $ssh_users = [],
+  # to enable empty passwords, change to yes (NOT RECOMMENDED)
+  $ssh_empty_password = 'no',
   # addition
   $ssh_manage_install = true,
   $ssh_manage_config = true,
@@ -29,7 +31,7 @@ class ssh (
   $ssh_service_name = undef,
   $ssh_service_enable = true,
   ) {
-
+  # set service name depends on OS
   if ! $ssh_service_name {
       $ssh_service_name_real = $::osfamily ? {
         'Debian' => hiera('ssh_service_name','ssh'),
@@ -39,7 +41,7 @@ class ssh (
   } else {
       $ssh_service_name_real = $ssh_service_name
   }
-
+  # set packages list depends on OS
   if ! $ssh_packages {
       $ssh_packages_real = $::osfamily ? {
         'Debian' => hiera('ssh_packages',
@@ -71,7 +73,8 @@ class ssh (
     }
   }
   
-  # Dependency block. Always should be at the end of first class.
+  # dependency block always should be at the end of first class
   Class['ssh::install']-> Class['ssh::config'] -> Class['ssh::service']
+  # install, configure and manage service
   include ssh::install, ssh::config, ssh::service
 }
