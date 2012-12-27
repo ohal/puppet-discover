@@ -1,7 +1,7 @@
-# 0.1 openssh manipulating by puppet
+# 0.1 openssh is manipulate by puppet
 # ohal@softserveinc.com
-# = check and install and configure openssh server and client
-# ubuntu 12 and centos 6 tested
+# = do check and install and configure openssh server and client
+# ubuntu and centos tested
 
 class ssh (
   $ssh_ensure = 'present',
