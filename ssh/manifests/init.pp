@@ -2,7 +2,6 @@
 # ohal@softserveinc.com
 # = do check and install and configure openssh server and client
 # ubuntu and centos tested
-
 class ssh (
   $ssh_ensure = 'present',
   # port is open for external connection to openssh server
@@ -60,32 +59,47 @@ class ssh (
   $ssh_service_ensure = 'running',
   $ssh_service_name = undef,
   $ssh_service_enable = true,
-  ) {
+    ) {
   # set service name depends on OS
   if ! $ssh_service_name {
       $ssh_service_name_real = $::osfamily ? {
         'Debian' => hiera('ssh_service_name','ssh'),
         'RedHat' => hiera('ssh_service_name','sshd'),
-        default  => hiera('ssh_service_name',undef),
+         default => hiera('ssh_service_name',undef),
         }
   } else {
       $ssh_service_name_real = $ssh_service_name
   }
   # set packages list depends on OS
   if ! $ssh_packages {
-      $ssh_packages_real = $::osfamily ? {
-          'Debian' => hiera('ssh_packages',
-                        ['ssh','openssh-client','openssh-server']
-                      ),
-          'RedHat' => hiera('ssh_packages',
-                        ['openssh','openssh-clients','openssh-server']
-                      ),
-           default => hiera('ssh_packages',undef),
+    case $osfamily {
+      'Debian': {
+        $ssh_packages_real = hiera('ssh_packages',
+          ['ssh','openssh-client','openssh-server'])
       }
+      'RedHat': {
+        $ssh_packages_real = hiera('ssh_packages',
+          ['openssh','openssh-clients','openssh-server'])
+      }
+      default : {
+#        $ssh_packages_real = hiera('ssh_packages',undef)
+#        notify { "${module_name}_unsupported":
+#          message => "the ${module_name} module is not supported on ${osfamily}",
+#        }
+        fail("the ${module_name} module is not supported on ${osfamily}, must be set =ssh_packages=")
+      }
+    }
+#      $ssh_packages_real = $::osfamily ? {
+#          'Debian' => hiera('ssh_packages',
+#                        ['ssh','openssh-client','openssh-server']),
+#          'RedHat' => hiera('ssh_packages',
+#                        ['openssh','openssh-clients','openssh-server']),
+#           default => hiera('ssh_packages',undef),
+#      }
   } else {
       $ssh_packages_real = $ssh_packages
   }
-
+  # ssh maintaining
   case $ssh_ensure {
     /(present)/: {
       if $ssh_autoupgrade == true {
@@ -102,7 +116,6 @@ class ssh (
       fail('ensure parameter must be present or absent')
     }
   }
-  
   # dependency block always should be at the end of first class
   Class['ssh::install']-> Class['ssh::config'] -> Class['ssh::service']
   # install, configure and manage service

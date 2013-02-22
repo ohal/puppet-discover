@@ -1,0 +1,7 @@
+# THIS FILE IS MANAGED BY PUPPET, DO NOT EDIT MANUALLY
+#
+PORT="<%= scope.lookupvar('memcached::memcached_port') %>"
+USER="<%= scope.lookupvar('memcached::memcached_user') %>"
+MAXCONN="<%= scope.lookupvar('memcached::memcached_connection') %>"
+CACHESIZE="<%= scope.lookupvar('memcached::memcached_cachesize') %>"
+OPTIONS="-l <%= scope.lookupvar('memcached::memcached_listen_ip') %>"
