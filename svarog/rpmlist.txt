@@ -1,0 +1,26 @@
+total 170M
+-rw-r--r--. 1 apache apache  16K кві 12 14:05 apr-util-ldap-1.3.9-3.el6_0.1.x86_64.rpm
+-rw-r--r--. 1 apache apache  42K кві 12 13:11 bash-modules-1.0.8-3.el6.noarch.rpm
+-rw-r--r--. 1 apache apache  94K кві 12 13:25 createrepo-0.9.9-17.el6.noarch.rpm
+-rw-r--r--. 1 apache apache 4,7M кві 12 14:00 git-1.7.1-3.el6_4.1.x86_64.rpm
+-rw-r--r--. 1 apache apache  75K сер 21  2012 htop-1.0.1-2.el6.x86_64.rpm
+-rw-r--r--. 1 apache apache 822K лют 23 19:40 httpd-2.2.15-26.el6.centos.x86_64.rpm
+-rw-r--r--. 1 apache apache  73K кві 12 14:05 httpd-tools-2.2.15-26.el6.centos.x86_64.rpm
+-rw-r--r--. 1 apache apache 105M кві 11 19:46 jdk-7u17-linux-x64.rpm
+-rw-r--r--. 1 apache apache  47M кві 12 14:00 jenkins-1.510-1.1.noarch.rpm
+-rw-r--r--. 1 apache apache 322K бер  1 12:09 libxml2-python-2.7.6-12.el6_4.1.x86_64.rpm
+-rw-r--r--. 1 apache apache  27K кві 12 14:14 mailcap-2.1.31-2.el6.noarch.rpm
+-rw-r--r--. 1 apache apache 1,7M лип  3  2011 mc-4.7.0.2-3.el6.x86_64.rpm
+-rw-r--r--. 1 apache apache 149K кві 12 13:07 mock-1.1.9-1.el6.rf.noarch.rpm
+-rw-r--r--. 1 apache apache  11M кві 12 14:05 perl-5.10.1-130.el6_4.x86_64.rpm
+-rw-r--r--. 1 apache apache  29K кві 12 14:11 perl-Error-0.17015-4.el6.noarch.rpm
+-rw-r--r--. 1 apache apache  28K кві 12 14:05 perl-Git-1.7.1-3.el6_4.1.noarch.rpm
+-rw-r--r--. 1 apache apache  42K кві 12 13:25 pigz-2.2.5-1.el6.x86_64.rpm
+-rw-r--r--. 1 apache apache  27K кві 12 13:25 python-decoratortools-1.7-4.1.el6.noarch.rpm
+-rw-r--r--. 1 apache apache  28K лип  3  2011 python-deltarpm-3.5-0.5.20090913git.el6.x86_64.rpm
+-rw-r--r--. 1 apache apache 335K кві 12 14:05 rsync-3.0.6-9.el6.x86_64.rpm
+-rw-r--r--. 1 apache apache 3,5K кві 12 13:33 ssof-platform-settings-1.0-2198.el6.noarch.rpm
+-rw-r--r--. 1 apache apache 9,3K кві 11 21:11 svarog-1.0-2246.el6.noarch.rpm
+-rw-r--r--. 1 apache apache 3,0K кві 11 21:11 svarog-ci-1.0-2232.el6.noarch.rpm
+-rw-r--r--. 1 apache apache 2,7K кві 11 21:11 svarog-repo-1.0-2235.el6.noarch.rpm
+-rw-r--r--. 1 apache apache 187K кві 12 13:25 usermode-1.102-3.el6.x86_64.rpm
